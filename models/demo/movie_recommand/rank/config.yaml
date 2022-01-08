@@ -18,8 +18,8 @@ runner:
   train_batch_size: 128
   model_save_path: "output_model_rank"
 
-  use_gpu: False
-  epochs: 5
+  use_gpu: True
+  epochs: 10
   print_interval: 20
   
   test_data_dir: "../data/test"

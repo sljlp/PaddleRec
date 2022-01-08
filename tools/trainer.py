@@ -114,6 +114,7 @@ def main(args):
 
     last_epoch_id = config.get("last_epoch", -1)
     step_num = 0
+    print(dy_model)
 
     for epoch_id in range(last_epoch_id + 1, epochs):
         # set train mode
@@ -194,19 +195,19 @@ def main(args):
         logger.info("epoch: {} done, ".format(epoch_id) + metric_str +
                     tensor_print_str + " epoch time: {:.2f} s".format(
                         time.time() - epoch_begin))
-
-        if use_fleet:
-            trainer_id = paddle.distributed.get_rank()
-            if trainer_id == 0:
-                save_model(
-                    dy_model,
-                    optimizer,
-                    model_save_path,
-                    epoch_id,
-                    prefix='rec')
-        else:
-            save_model(
-                dy_model, optimizer, model_save_path, epoch_id, prefix='rec')
+        
+        # if use_fleet:
+        #     trainer_id = paddle.distributed.get_rank()
+        #     if trainer_id == 0:
+        #         save_model(
+        #             dy_model,
+        #             optimizer,
+        #             model_save_path,
+        #             epoch_id,
+        #             prefix='rec')
+        # else:
+        #     save_model(
+        #         dy_model, optimizer, model_save_path, epoch_id, prefix='rec')
 
 
 if __name__ == '__main__':
