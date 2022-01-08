@@ -17,35 +17,9 @@ os : linux
 pip install py27hash
 bash data_prepare.sh
 ```
-
-### 模型训练
 ```shell
-# 动态图训练recall模型
-python -u ../../../tools/trainer.py -m recall/config.yaml
-# 静态图训练recall模型
-python -u ../../../tools/static_trainer.py -m recall/config.yaml
-# 动态图训练rank模型
-python -u ../../../tools/trainer.py -m rank/config.yaml
-# 静态图训练rank模型
-python -u ../../../tools/static_trainer.py -m rank/config.yaml
-```
-
-### 模型测试
-```shell
-# 动态图预测recall模型
-python -u infer.py -m recall/config.yaml
-# 静态图预测recall模型
-python -u static_infer.py -m recall/config.yaml
-# 动态图预测rank模型
-python -u infer.py -m rank/config.yaml
-# 静态图预测rank模型
-python -u static_infer.py -m rank/config.yaml
-```
-
-### 测试结果解析
-```shell
-# recall模型的测试结果解析
-python parse.py recall_offline recall_infer_result
-# rank模型的测试结果解析
-python parse.py rank_offline rank_infer_result
+# 动态图训练无moe rank模型
+USING_MOE=False python -u ../../../tools/trainer.py -m rank/config.yaml
+# 动态图训练带moe的rank模型
+USING_MOE=True EXPERT_COUNT=32 python -u ../../../tools/static_trainer.py -m rank/config.yaml
 ```
